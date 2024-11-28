@@ -22,16 +22,14 @@ const formSchema = z.object({
   password: z.string().min(1, "Required"),
 });
 
-const SignInCard = () => {
-  const form =
-    useForm <
-    z.infer<typeof formSchema>({
-      resolver: zodResolver(formSchema),
-      defaultValues: {
-        email: "",
-        password: "",
-      },
-    });
+export const SignInCard = () => {
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
 
   const onSubmit = (value: z.infer<typeof formSchema>) => {
     console.log(value);
@@ -59,8 +57,8 @@ const SignInCard = () => {
                       type="email"
                       placeholder="Enter email address"
                     />
-                    <FormMessage />
                   </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -76,8 +74,8 @@ const SignInCard = () => {
                       type="password"
                       placeholder="Enter email address"
                     />
-                    <FormMessage />
                   </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -114,5 +112,3 @@ const SignInCard = () => {
     </Card>
   );
 };
-
-export default SignInCard;
