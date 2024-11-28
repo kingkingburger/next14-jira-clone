@@ -53,6 +53,7 @@ export const SignUpCard = () => {
           <Link href="/privacy">
             <span className="text-blue-700">Privacy Policy</span>
           </Link>{" "}
+          and{" "}
           <Link href="terms">
             <span className="text-blue-700">Terms of Service</span>
           </Link>
@@ -143,6 +144,17 @@ export const SignUpCard = () => {
           <FaGithub />
           Login with Github
         </Button>
+      </CardContent>
+      <div className="px-7">
+        <DottedSeparator />
+      </div>
+      <CardContent className="p-7 flex justify-center text-center">
+        <p>
+          Already have an account?{" "}
+          <Link href="/sign-in" className="text-blue-700">
+            Sign in
+          </Link>
+        </p>
       </CardContent>
     </Card>
   );
