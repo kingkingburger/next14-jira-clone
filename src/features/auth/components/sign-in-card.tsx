@@ -17,6 +17,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import Link from "next/link";
+import { useLogin } from "@/features/auth/api/use-login";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -24,6 +25,8 @@ const formSchema = z.object({
 });
 
 export const SignInCard = () => {
+  const { mutate } = useLogin();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -33,7 +36,7 @@ export const SignInCard = () => {
   });
 
   const onSubmit = (value: z.infer<typeof formSchema>) => {
-    console.log(value);
+    mutate(value);
   };
 
   return (
