@@ -13,8 +13,7 @@ type RequestType = InferRequestType<
 export const useLogin = () => {
   const mutation = useMutation<ResponseType, Error, RequestType>({
     mutationFn: async ({ json, param }) => {
-      1;
-      const response = await client.api.auth.login["userId"]["$post"](json)({
+      const response = await client.api.auth.login[":userId"]["$post"](json)({
         json,
         param,
       });
