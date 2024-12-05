@@ -38,7 +38,6 @@ export const SignInCard = () => {
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     mutate({
       json: values,
-      params: { userId: "1234" },
     });
   };
 
