@@ -1,3 +1,5 @@
+import "server-only"; // server component 에서만 동작하게 만듬
+
 import { Account, Client } from "node-appwrite";
 
 export async function createAdminClient() {
