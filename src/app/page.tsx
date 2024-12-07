@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 import { useCurrent } from "@/features/auth/api/user-current";
 export default function Home() {
