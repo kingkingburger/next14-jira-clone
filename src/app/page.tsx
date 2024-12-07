@@ -1,15 +1,18 @@
-import {Button} from "@/components/ui/button";
-import {Input} from "@/components/ui/input";
+"use client";
 
+import { useEffect } from "react";
+import { useRouter } from "next/router";
+
+import { useCurrent } from "@/features/auth/api/user-current";
 export default function Home() {
-    return (
-        <div className="">
-            <Input/>
-            <Button size="lg"> test</Button>
-            <Button variant="destructive"> test</Button>
-            <Button variant="muted"> mute</Button>
-            <Button variant="teritrary"> teritrary</Button>
+  const router = useRouter();
+  const { data, isLoading } = useCurrent();
 
-        </div>
-    );
+  useEffect(() => {
+    if (!data && !isLoading) {
+      router.push("/sing-in");
+    }
+  }, [data]);
+
+  return <div className="">Only visible to authorized users.</div>;
 }
