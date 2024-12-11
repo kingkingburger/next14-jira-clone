@@ -3,6 +3,11 @@
 import { useCurrent } from "@/features/auth/api/user-current";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Loader } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export const UserButton = () => {
   const { data: user, isLoading } = useCurrent();
@@ -25,10 +30,28 @@ export const UserButton = () => {
     : (email.charAt(0).toUpperCase() ?? "U");
 
   return (
-    <Avatar className="size-10 hover:opacity-75 transition border border-neutral-300">
-      <AvatarFallback className="bg-neutral-200 font-medium text-neutral-500 flex items-center justify-center">
-        {avatarFallback}
-      </AvatarFallback>
-    </Avatar>
+    <DropdownMenu modal={false}>
+      <DropdownMenuTrigger className="outline-none relative">
+        <Avatar className="size-10 hover:opacity-75 transition border border-neutral-300">
+          <AvatarFallback className="bg-neutral-200 font-medium text-neutral-500 flex items-center justify-center">
+            {avatarFallback}
+          </AvatarFallback>
+        </Avatar>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent
+        align="end"
+        side="bottom"
+        className="w-60"
+        sideOffset={10}
+      >
+        <div className="flex flex-col items-center gap-2 px-2.5 py-4">
+          <Avatar className="size-10 hover:opacity-75 transition border border-neutral-300">
+            <AvatarFallback className="bg-neutral-200 font-medium text-neutral-500 flex items-center justify-center">
+              {avatarFallback}
+            </AvatarFallback>
+          </Avatar>
+        </div>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };
