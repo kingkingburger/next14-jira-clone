@@ -27,7 +27,7 @@ const formSchema = z.object({
 });
 
 export const SignInCard = () => {
-  const { mutate } = useLogin();
+  const { mutate, isPending } = useLogin();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -63,6 +63,7 @@ export const SignInCard = () => {
                     <Input
                       {...field}
                       type="email"
+                      disabled={isPending}
                       placeholder="Enter email address"
                     />
                   </FormControl>
@@ -80,6 +81,7 @@ export const SignInCard = () => {
                     <Input
                       {...field}
                       type="password"
+                      disabled={isPending}
                       placeholder="Enter email address"
                     />
                   </FormControl>
