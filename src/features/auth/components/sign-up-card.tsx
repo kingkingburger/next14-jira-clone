@@ -1,3 +1,5 @@
+"use client";
+
 import { z } from "zod";
 
 import Link from "next/link";
@@ -115,7 +117,7 @@ export const SignUpCard = () => {
             />
 
             <Button disabled={false} size="lg" className="w-full">
-              Sign up
+              Register
             </Button>
           </form>
         </Form>
