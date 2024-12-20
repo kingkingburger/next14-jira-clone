@@ -25,6 +25,7 @@ export const DottedSeparator = ({
         isHorizontal
           ? "w-full flex items-center"
           : "h-full flex flex-col items-center",
+        className,
       )}
     >
       <div

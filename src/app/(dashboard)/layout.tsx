@@ -1,3 +1,5 @@
+import { Sidebar } from "@/components/sidebar";
+
 interface DashboardLayoutProps {
   children: React.ReactNode;
 }
@@ -6,7 +8,7 @@ const DashBoardLayout = ({ children }: DashboardLayoutProps) => {
   return (
     <div className="min-h-screen">
       <div className="flex w-full h-full">
-        <div className="fixed left-0 top-0 hidden lg:block lg:w-[264px] overflow-y-auto">
+        <div className="fixed left-0 top-0 hidden lg:block lg:w-[264px] h-full overflow-y-auto">
           <Sidebar />
         </div>
         <div className="lg:pl-[264px]">
