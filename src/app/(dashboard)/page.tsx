@@ -1,6 +1,7 @@
 import React from "react";
 import { getCurrent } from "@/features/auth/action";
 import { redirect } from "next/navigation";
+import { CreateWorkspaceForm } from "@/features/workspaces/components/create-workspace-form";
 
 export default async function Home() {
   const user = await getCurrent();
@@ -9,5 +10,9 @@ export default async function Home() {
     redirect("/sign-in");
   }
 
-  return <div className="">This is a home page</div>;
+  return (
+    <div className="">
+      <CreateWorkspaceForm onCancel={() => {}} />
+    </div>
+  );
 }
