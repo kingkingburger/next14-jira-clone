@@ -43,46 +43,47 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
         <CardTitle className="text-xl font-bold">
           Create a new workspace
         </CardTitle>
-        <div className="px-7">
-          <DottedSeparator />
-        </div>
-        <CardContent className="p-7">
-          <div className="flex flex-col gap-y-4">
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)}>
-                <FormField
-                  control={form.control}
-                  name="name"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Workspace Name</FormLabel>
-                      <FormControl>
-                        <Input {...field} placeholder="Enter workspace name" />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <DottedSeparator className="py-7" />
-                <div className="flex items-center justify-between">
-                  <Button
-                    type="button"
-                    size="lg"
-                    variant="secondary"
-                    onClick={onCancel}
-                    disabled={isPending}
-                  >
-                    Cancel
-                  </Button>
-                  <Button disabled={isPending} type="submit" size="lg">
-                    Create WorkSpace
-                  </Button>
-                </div>
-              </form>
-            </Form>
-          </div>
-        </CardContent>
       </CardHeader>
+
+      <div className="px-7">
+        <DottedSeparator />
+      </div>
+      <CardContent className="p-7">
+        <div className="flex flex-col gap-y-4">
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)}>
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Workspace Name</FormLabel>
+                    <FormControl>
+                      <Input {...field} placeholder="Enter workspace name" />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <DottedSeparator className="py-7" />
+              <div className="flex items-center justify-between">
+                <Button
+                  type="button"
+                  size="lg"
+                  variant="secondary"
+                  onClick={onCancel}
+                  disabled={isPending}
+                >
+                  Cancel
+                </Button>
+                <Button disabled={isPending} type="submit" size="lg">
+                  Create WorkSpace
+                </Button>
+              </div>
+            </form>
+          </Form>
+        </div>
+      </CardContent>
     </Card>
   );
 };
