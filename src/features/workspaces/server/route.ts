@@ -13,7 +13,7 @@ const app = new Hono().post(
     const databases = c.get("databases");
     const user = c.get("user");
 
-    const { name } = c.req.valid("json");
+    const { name, image } = c.req.valid("json");
 
     const workspace = await databases.createDocument(
       DATABASE_ID,
