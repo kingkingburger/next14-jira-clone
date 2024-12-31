@@ -61,9 +61,9 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
         <DottedSeparator />
       </div>
       <CardContent className="p-7">
-        <div className="flex flex-col gap-y-4">
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)}>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)}>
+            <div className="flex flex-col gap-y-4">
               <FormField
                 control={form.control}
                 name="name"
@@ -97,9 +97,9 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
                           />
                         </div>
                       ) : (
-                        <Avatar className="w-18 h-18 mr-4">
+                        <Avatar className="size-[72px]">
                           <AvatarFallback>
-                            <ImageIcon className="w-9 h-9 text-neutral-400" />
+                            <ImageIcon className="size-[36px] text-neutral-400" />
                           </AvatarFallback>
                         </Avatar>
                       )}
@@ -146,9 +146,9 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
                   Create WorkSpace
                 </Button>
               </div>
-            </form>
-          </Form>
-        </div>
+            </div>
+          </form>
+        </Form>
       </CardContent>
     </Card>
   );
