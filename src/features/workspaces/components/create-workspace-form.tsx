@@ -29,7 +29,6 @@ interface CreateWorkspaceFormProps {
 
 export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
   const { mutate, isPending } = useCreateWorkSpaces();
-
   const inputRef = useRef<HTMLInputElement>(null);
 
   const form = useForm<z.infer<typeof createWorkspacesSchema>>({
@@ -98,9 +97,9 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
                           />
                         </div>
                       ) : (
-                        <Avatar className="size-[72px]">
+                        <Avatar className="w-18 h-18 mr-4">
                           <AvatarFallback>
-                            <ImageIcon className="size-[36px] text-neutral-400" />
+                            <ImageIcon className="w-9 h-9 text-neutral-400" />
                           </AvatarFallback>
                         </Avatar>
                       )}
@@ -115,11 +114,12 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
                           ref={inputRef}
                           onChange={handleImageChange}
                           disabled={isPending}
+                          type="file"
                         />
                         <Button
                           type="button"
                           disabled={isPending}
-                          variant="teritrary"
+                          variant="tertiary"
                           size="xs"
                           className="w-full mt-2"
                           onClick={() => inputRef.current?.click()}
@@ -131,7 +131,6 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
                   </div>
                 )}
               />
-
               <DottedSeparator className="py-7" />
               <div className="flex items-center justify-between">
                 <Button
