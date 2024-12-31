@@ -9,14 +9,14 @@ import { createWorkspacesSchema } from "@/features/workspaces/schemas";
 
 const app = new Hono().post(
   "/",
-  zValidator("json", createWorkspacesSchema),
+  zValidator("form", createWorkspacesSchema),
   sessionMiddleware,
   async (c) => {
     const databases = c.get("databases");
     const storage = c.get("storage");
     const user = c.get("user");
 
-    const { name, image } = c.req.valid("json");
+    const { name, image } = c.req.valid("form");
 
     let uploadedImageUrl: string | undefined;
 
