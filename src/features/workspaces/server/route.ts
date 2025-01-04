@@ -2,10 +2,16 @@ import { Hono } from "hono";
 import { zValidator } from "@hono/zod-validator";
 import { ID } from "node-appwrite";
 
-import { sessionMiddleware } from "@/lib/session-middleware";
-import { DATABASE_ID, IMAGES_BUCKET_ID, WORKSPACES_ID } from "@/config";
-
+import { MemberRole } from "@/features/members/types";
 import { createWorkspacesSchema } from "@/features/workspaces/schemas";
+
+import { sessionMiddleware } from "@/lib/session-middleware";
+import {
+  DATABASE_ID,
+  IMAGES_BUCKET_ID,
+  MEMBERS_ID,
+  WORKSPACES_ID,
+} from "@/config";
 
 const app = new Hono()
   .get("/", sessionMiddleware, async (c) => {
@@ -55,6 +61,12 @@ const app = new Hono()
           imageUrl: uploadedImageUrl,
         },
       );
+
+      await databases.createDocument(DATABASE_ID, MEMBERS_ID, ID.unique(), {
+        userId: user.$id,
+        workspaceId: workspace.$id,
+        role: MemberRole.ADMIN,
+      });
 
       return c.json({ data: workspace });
     },
