@@ -3,8 +3,8 @@ import { zValidator } from "@hono/zod-validator";
 import { ID, Query } from "node-appwrite";
 
 import { MemberRole } from "@/features/members/types";
-import { createWorkspacesSchema } from "@/features/workspaces/schemas";
 
+import { generateInviteCode } from "@/lib/utils";
 import { sessionMiddleware } from "@/lib/session-middleware";
 import {
   DATABASE_ID,
@@ -12,6 +12,8 @@ import {
   MEMBERS_ID,
   WORKSPACES_ID,
 } from "@/config";
+
+import { createWorkspacesSchema } from "@/features/workspaces/schemas";
 
 const app = new Hono()
   .get("/", sessionMiddleware, async (c) => {
@@ -72,6 +74,7 @@ const app = new Hono()
           name: name,
           userId: user.$id,
           imageUrl: uploadedImageUrl,
+          inviteCode: generateInviteCode(6),
         },
       );
 
