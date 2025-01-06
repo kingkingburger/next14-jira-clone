@@ -35,6 +35,7 @@ const app = new Hono()
       WORKSPACES_ID,
       [Query.orderDesc("$createdAt"), Query.contains("$id", workspaceIds)],
     );
+
     return c.json({ data: workspaces });
   })
 
