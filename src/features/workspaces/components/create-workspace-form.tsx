@@ -8,6 +8,7 @@ import { ImageIcon } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createWorkspacesSchema } from "@/features/workspaces/schemas";
 import { useCreateWorkSpaces } from "@/features/workspaces/api/use-create-workspaces";
+import { useRouter } from "next/navigation";
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
@@ -28,6 +29,7 @@ interface CreateWorkspaceFormProps {
 }
 
 export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
+  const router = useRouter();
   const { mutate, isPending } = useCreateWorkSpaces();
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -47,9 +49,9 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
     mutate(
       { form: finalValue },
       {
-        onSuccess: () => {
+        onSuccess: ({ data }) => {
           form.reset();
-          //TODO: Redirect to new workspace
+          router.push(`/workspaces/${data.$id}`);
         },
       },
     );
