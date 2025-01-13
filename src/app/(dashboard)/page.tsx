@@ -4,7 +4,6 @@ import { getWorkspaces } from "@/features/workspaces/action";
 
 export default async function Home() {
   const user = await getCurrent();
-
   if (!user) {
     redirect("/sign-in");
   }
