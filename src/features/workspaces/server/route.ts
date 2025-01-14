@@ -105,7 +105,11 @@ const app = new Hono()
       const { workspaceId } = c.req.param();
       const { name, image } = c.req.valid("form");
 
-      const member = getMembers({ databases, workspaceId, userId: user.$id });
+      const member = await getMembers({
+        databases,
+        workspaceId,
+        userId: user.$id,
+      });
 
       if (!member || member.role !== MemberRole.ADMIN) {
         return c.json({ error: "Unauthorized" }, 401);
