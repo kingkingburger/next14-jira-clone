@@ -13,7 +13,10 @@ import {
   WORKSPACES_ID,
 } from "@/config";
 
-import { createWorkspacesSchema } from "@/features/workspaces/schemas";
+import {
+  createWorkspacesSchema,
+  updateWorkspacesSchema,
+} from "@/features/workspaces/schemas";
 
 const app = new Hono()
   .get("/", sessionMiddleware, async (c) => {
@@ -86,6 +89,22 @@ const app = new Hono()
       });
 
       return c.json({ data: workspace });
+    },
+  )
+
+  .patch(
+    "/:workspaceId",
+    sessionMiddleware,
+    zValidator("form", updateWorkspacesSchema),
+    async (c) => {
+      const databases = c.get("databases");
+      const storage = c.get("storage");
+      const user = c.get("user");
+
+      const { workspaceId } = c.req.param();
+      const { name, image } = c.req.valid("form");
+
+      const member = null;
     },
   );
 
