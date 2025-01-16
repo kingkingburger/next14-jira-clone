@@ -8,8 +8,8 @@ import { ImageIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { updateWorkspacesSchema } from "@/features/workspaces/schemas";
-import { useCreateWorkSpaces } from "@/features/workspaces/api/use-create-workspaces";
 import { Workspace } from "@/features/workspaces/type/types";
+import { useUpdateWorkSpaces } from "@/features/workspaces/api/use-update-workspaces";
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
@@ -36,7 +36,7 @@ export const EditWorkspaceForm = ({
   initialValues,
 }: EditWorkspaceFormProps) => {
   const router = useRouter();
-  const { mutate, isPending } = useCreateWorkSpaces();
+  const { mutate, isPending } = useUpdateWorkSpaces();
   const inputRef = useRef<HTMLInputElement>(null);
 
   const form = useForm<z.infer<typeof updateWorkspacesSchema>>({
