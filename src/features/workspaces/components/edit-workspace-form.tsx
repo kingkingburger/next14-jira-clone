@@ -4,8 +4,8 @@ import { z } from "zod";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import React, { useRef } from "react";
-import { ImageIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { ArrowLeft, ImageIcon } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { updateWorkspacesSchema } from "@/features/workspaces/schemas";
 import { Workspace } from "@/features/workspaces/type/types";
@@ -76,7 +76,19 @@ export const EditWorkspaceForm = ({
 
   return (
     <Card className="w-full h-full border-none shadow-none">
-      <CardHeader className="flex p-7">
+      <CardHeader className="flex flex-row items-center gap-x-4 p-7 space-y-0">
+        <Button
+          size="sm"
+          variant="secondary"
+          onClick={
+            onCancel
+              ? onCancel
+              : () => router.push(`/workspaces/${initialValues.$id}`)
+          }
+        >
+          <ArrowLeft className="size-4 mr-2" />
+          Back
+        </Button>
         <CardTitle className="text-xl font-bold">
           {initialValues.name}
         </CardTitle>
@@ -169,7 +181,7 @@ export const EditWorkspaceForm = ({
                   Cancel
                 </Button>
                 <Button disabled={isPending} type="submit" size="lg">
-                  Create WorkSpace
+                  Save Changes
                 </Button>
               </div>
             </div>
