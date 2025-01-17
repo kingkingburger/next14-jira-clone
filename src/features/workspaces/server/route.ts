@@ -136,7 +136,7 @@ const app = new Hono()
 
       const workspace = await databases.updateDocument(
         DATABASE_ID,
-        MEMBERS_ID,
+        WORKSPACES_ID,
         workspaceId,
         { name, imageUrl: uploadedImageUrl },
       );
