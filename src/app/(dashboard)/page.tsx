@@ -1,4 +1,4 @@
-import { getCurrent } from "@/features/auth/action";
+import { getCurrent } from "@/features/auth/queries";
 import { redirect } from "next/navigation";
 import { getWorkspaces } from "@/features/workspaces/action";
 
