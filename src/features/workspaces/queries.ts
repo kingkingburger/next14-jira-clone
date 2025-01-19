@@ -1,14 +1,13 @@
 "use server";
 
-import { cookies } from "next/headers";
-import { Account, Client, Databases, Query } from "node-appwrite";
+import { Query } from "node-appwrite";
 
 import { getMembers } from "@/features/members/util";
-import { AUTH_COKKIE } from "@/features/auth/constant";
 
 import { DATABASE_ID, MEMBERS_ID, WORKSPACES_ID } from "@/config";
 
 import { Workspace } from "@/features/workspaces/type/types";
+
 import { createSessionClient } from "@/lib/appwrite";
 
 export const getWorkspaces = async () => {
