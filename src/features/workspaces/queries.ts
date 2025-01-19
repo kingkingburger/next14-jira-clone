@@ -1,11 +1,8 @@
-"use server";
-
 import { Query } from "node-appwrite";
-
-import { getMembers } from "@/features/members/util";
 
 import { DATABASE_ID, MEMBERS_ID, WORKSPACES_ID } from "@/config";
 
+import { getMembers } from "@/features/members/util";
 import { Workspace } from "@/features/workspaces/type/types";
 
 import { createSessionClient } from "@/lib/appwrite";
@@ -40,6 +37,7 @@ export const getWorkspaces = async () => {
 interface GetWorkspaceProps {
   workspaceId: string;
 }
+
 export const getWorkspace = async ({ workspaceId }: GetWorkspaceProps) => {
   try {
     const { account, databases } = await createSessionClient();
