@@ -25,6 +25,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { cn } from "@/lib/utils";
+import { useConfirm } from "@/hooks/use-confirm";
 
 interface EditWorkspaceFormProps {
   onCancel?: () => void;
@@ -37,6 +38,8 @@ export const EditWorkspaceForm = ({
 }: EditWorkspaceFormProps) => {
   const router = useRouter();
   const { mutate, isPending } = useUpdateWorkSpaces();
+
+  const [DeleteDialog, confirmDelete] = useConfirm();
 
   const inputRef = useRef<HTMLInputElement>(null);
 
