@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/form";
 import { cn } from "@/lib/utils";
 import { useConfirm } from "@/hooks/use-confirm";
+import { useDeleteWorkSpaces } from "@/features/workspaces/api/use-delete-workspaces";
 
 interface EditWorkspaceFormProps {
   onCancel?: () => void;
@@ -38,6 +39,8 @@ export const EditWorkspaceForm = ({
 }: EditWorkspaceFormProps) => {
   const router = useRouter();
   const { mutate, isPending } = useUpdateWorkSpaces();
+  const { mutate: deleteWorkspace, isPending: isDeleteingWorkspace } =
+    useDeleteWorkSpaces();
 
   const [DeleteDialog, confirmDelete] = useConfirm(
     "Delete Workspace",
@@ -59,7 +62,17 @@ export const EditWorkspaceForm = ({
     const ok = await confirmDelete();
 
     if (!ok) return;
-    console.log("deleting...");
+
+    deleteWorkspace(
+      {
+        param: { workspaceId: initialValues.$id },
+      },
+      {
+        onSuccess: () => {
+          router.push("/");
+        },
+      },
+    );
   };
 
   const onSubmit = (values: z.infer<typeof updateWorkspacesSchema>) => {
