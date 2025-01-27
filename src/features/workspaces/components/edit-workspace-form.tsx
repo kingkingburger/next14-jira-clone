@@ -250,7 +250,7 @@ export const EditWorkspaceForm = ({
               size="sm"
               variant="destructive"
               type="button"
-              disabled={isPending}
+              disabled={isPending || isDeleteingWorkspace}
               onClick={handleDelete}
             >
               Delete Workspace
