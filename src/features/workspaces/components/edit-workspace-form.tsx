@@ -69,7 +69,7 @@ export const EditWorkspaceForm = ({
       },
       {
         onSuccess: () => {
-          router.push("/");
+          window.location.href = "/"; // hard refresh
         },
       },
     );
