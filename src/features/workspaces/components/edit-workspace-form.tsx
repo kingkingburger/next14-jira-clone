@@ -27,6 +27,7 @@ import {
 import { cn } from "@/lib/utils";
 import { useConfirm } from "@/hooks/use-confirm";
 import { useDeleteWorkSpaces } from "@/features/workspaces/api/use-delete-workspaces";
+import { toast } from "sonner";
 
 interface EditWorkspaceFormProps {
   onCancel?: () => void;
@@ -103,6 +104,12 @@ export const EditWorkspaceForm = ({
   };
 
   const fullInviteLink = `${window.location.origin}/workspace/${initialValues.$id}/join/${initialValues.inviteCode}`;
+
+  const handleCopyInviteLink = () => {
+    navigator.clipboard
+      .writeText(fullInviteLink)
+      .then(() => toast.success("Invite link copied to clipboard"));
+  };
 
   return (
     <div className="flex flex-col gap-y-4">
@@ -251,7 +258,7 @@ export const EditWorkspaceForm = ({
               <div className="flex items-center gap-x-2">
                 <Input disabled value={fullInviteLink} />
                 <Button
-                  onClick={() => {}}
+                  onClick={handleCopyInviteLink}
                   variant="secondary"
                   className="size-12"
                 >
