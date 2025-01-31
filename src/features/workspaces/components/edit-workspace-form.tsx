@@ -28,6 +28,7 @@ import { cn } from "@/lib/utils";
 import { useConfirm } from "@/hooks/use-confirm";
 import { useDeleteWorkSpaces } from "@/features/workspaces/api/use-delete-workspaces";
 import { toast } from "sonner";
+import { useResetInviteCode } from "@/features/workspaces/api/use-reset-invite-code";
 
 interface EditWorkspaceFormProps {
   onCancel?: () => void;
@@ -40,12 +41,21 @@ export const EditWorkspaceForm = ({
 }: EditWorkspaceFormProps) => {
   const router = useRouter();
   const { mutate, isPending } = useUpdateWorkSpaces();
-  const { mutate: deleteWorkspace, isPending: isDeleteingWorkspace } =
+  const { mutate: deleteWorkspace, isPending: isDeletingWorkspace } =
     useDeleteWorkSpaces();
+
+  const { mutate: resetInviteCode, isPending: isResettingInviteCode } =
+    useResetInviteCode();
 
   const [DeleteDialog, confirmDelete] = useConfirm(
     "Delete Workspace",
     "This action cannot be undone",
+    "destructive",
+  );
+
+  const [ResetDialog, confirmReset] = useConfirm(
+    "Reset invite link",
+    "This will invalidate the current invite link",
     "destructive",
   );
 
@@ -71,6 +81,23 @@ export const EditWorkspaceForm = ({
       {
         onSuccess: () => {
           window.location.href = "/"; // hard refresh
+        },
+      },
+    );
+  };
+
+  const handleResetInviteCode = async () => {
+    const ok = await confirmReset();
+
+    if (!ok) return;
+
+    resetInviteCode(
+      {
+        param: { workspaceId: initialValues.$id },
+      },
+      {
+        onSuccess: () => {
+          router.refresh();
         },
       },
     );
@@ -114,6 +141,7 @@ export const EditWorkspaceForm = ({
   return (
     <div className="flex flex-col gap-y-4">
       <DeleteDialog />
+      <ResetDialog />
       <Card className="w-full h-full border-none shadow-none">
         <CardHeader className="flex flex-row items-center gap-x-4 p-7 space-y-0">
           <Button
@@ -266,15 +294,16 @@ export const EditWorkspaceForm = ({
                 </Button>
               </div>
             </div>
+            <DottedSeparator className="py-7" />
             <Button
               className="mt-6 w-fit ml-auto"
               size="sm"
               variant="destructive"
               type="button"
-              disabled={isPending || isDeleteingWorkspace}
-              onClick={handleDelete}
+              disabled={isPending || isResettingInviteCode}
+              onClick={handleResetInviteCode}
             >
-              Delete Workspace
+              Reset invite Link
             </Button>
           </div>
         </CardContent>
@@ -288,12 +317,13 @@ export const EditWorkspaceForm = ({
               Deleting a workspace is irreversible and will remove all
               associated data
             </p>
+            <DottedSeparator className="py-7" />
             <Button
               className="mt-6 w-fit ml-auto"
               size="sm"
               variant="destructive"
               type="button"
-              disabled={isPending || isDeleteingWorkspace}
+              disabled={isPending || isDeletingWorkspace}
               onClick={handleDelete}
             >
               Delete Workspace
