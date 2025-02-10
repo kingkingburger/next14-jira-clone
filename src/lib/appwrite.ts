@@ -1,6 +1,6 @@
 import "server-only"; // server component 에서만 동작하게 만듬
 
-import { Account, Client, Databases } from "node-appwrite";
+import { Account, Client, Databases, Users } from "node-appwrite";
 import { cookies } from "next/headers";
 
 import { AUTH_COKKIE } from "@/features/auth/constant";
@@ -36,6 +36,9 @@ export async function createAdminClient() {
   return {
     get account() {
       return new Account(client);
+    },
+    get users() {
+      return new Users(client);
     },
   };
 }
