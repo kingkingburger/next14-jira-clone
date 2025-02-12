@@ -82,9 +82,19 @@ const app = new Hono()
       return c.json({ error: "Unauthorized" }, 401);
     }
 
+    if (allMembersInWorkspace.total === 1) {
+      return c.json({ error: "Cannot delete the only member" });
+    }
+
     await databases.deleteDocument(DATABASE_ID, MEMBERS_ID, memberId);
 
     return c.json({ data: { $id: memberToDelete.$id } });
-  });
+  })
+  .patch(
+    "/:memberId",
+    sessionMiddleware,
+    zValidator("json", z.object({ role: z.nativeEnum(MemberRole) })),
+    async (c) => {},
+  );
 
 export default app;
