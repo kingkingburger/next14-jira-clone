@@ -3,13 +3,14 @@ import { InferRequestType, InferResponseType } from "hono";
 import { toast } from "sonner";
 
 import { client } from "@/lib/rpc";
+import members from "@/features/members/server/route";
 
 type ResponseType = InferResponseType<
-  (typeof client.api.member)[":memberId"]["$delete"],
+  (typeof client.api.members)[":memberId"]["$delete"],
   200
 >;
 type RequestType = InferRequestType<
-  (typeof client.api.member)[":memberId"]["$delete"]
+  (typeof client.api.members)[":memberId"]["$delete"]
 >;
 
 export const useDeleteMember = () => {
@@ -17,7 +18,7 @@ export const useDeleteMember = () => {
 
   const mutation = useMutation<ResponseType, Error, RequestType>({
     mutationFn: async ({ param }) => {
-      const response = await client.api.member[":memberId"]["$delete"]({
+      const response = await client.api.members[":memberId"]["$delete"]({
         param,
       });
       if (!response.ok) {
