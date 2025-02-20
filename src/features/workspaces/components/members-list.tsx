@@ -7,9 +7,13 @@ import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { DottedSeparator } from "@/components/dotted-separator";
+import { useGetMembers } from "@/features/members/api/use-get-members";
+import { Fragment } from "react";
+import { MembersAvatar } from "@/features/members/components/members-avatar";
 
 export const MembersList = () => {
   const workspaceId = useWorkspaceId();
+  const { data } = useGetMembers({ workspaceId });
 
   return (
     <Card className="w-full h-full border-none shadow-none">
@@ -25,7 +29,15 @@ export const MembersList = () => {
       <div className="px-7">
         <DottedSeparator />
       </div>
-      <CardContent className="p-7"></CardContent>
+      <CardContent className="p-7">
+        {data?.documents.map((member, index) => (
+          <Fragment key={member.$id}>
+            <div className="flex items-center gap-2">
+              <MembersAvatar />
+            </div>
+          </Fragment>
+        ))}
+      </CardContent>
     </Card>
   );
 };
