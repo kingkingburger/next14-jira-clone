@@ -11,7 +11,7 @@ import { useGetMembers } from "@/features/members/api/use-get-members";
 import { Fragment } from "react";
 import { MembersAvatar } from "@/features/members/components/members-avatar";
 
-export const MembersList = () => {
+export const MemberList = () => {
   const workspaceId = useWorkspaceId();
   const { data } = useGetMembers({ workspaceId });
 
@@ -33,7 +33,11 @@ export const MembersList = () => {
         {data?.documents.map((member, index) => (
           <Fragment key={member.$id}>
             <div className="flex items-center gap-2">
-              <MembersAvatar />
+              <MembersAvatar
+                className="size-10"
+                fallbackClassName="text-lg"
+                name={member.name}
+              />
             </div>
           </Fragment>
         ))}
