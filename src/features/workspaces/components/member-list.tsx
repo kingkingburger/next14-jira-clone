@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeftIcon } from "lucide-react";
+import { ArrowLeftIcon, MoreVerticalIcon } from "lucide-react";
 
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -10,6 +10,7 @@ import { DottedSeparator } from "@/components/dotted-separator";
 import { useGetMembers } from "@/features/members/api/use-get-members";
 import { Fragment } from "react";
 import { MembersAvatar } from "@/features/members/components/members-avatar";
+import { Separator } from "@/components/ui/separator";
 
 export const MemberList = () => {
   const workspaceId = useWorkspaceId();
@@ -38,7 +39,17 @@ export const MemberList = () => {
                 fallbackClassName="text-lg"
                 name={member.name}
               />
+              <div className="flex flex-col">
+                <p className="text-sm font-medium">{member.name}</p>
+                <p className="text-xs font-muted-foreground">{member.name}</p>
+              </div>
+              <Button className="ml-auto" variant="secondary" size="icon">
+                <MoreVerticalIcon className="size-4 text-muted-foreground" />
+              </Button>
             </div>
+            {index < data.documents.length - 1 && (
+              <Separator className="my-2.5" />
+            )}
           </Fragment>
         ))}
       </CardContent>
