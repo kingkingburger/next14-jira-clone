@@ -11,6 +11,12 @@ import { useGetMembers } from "@/features/members/api/use-get-members";
 import { Fragment } from "react";
 import { MembersAvatar } from "@/features/members/components/members-avatar";
 import { Separator } from "@/components/ui/separator";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export const MemberList = () => {
   const workspaceId = useWorkspaceId();
@@ -43,9 +49,36 @@ export const MemberList = () => {
                 <p className="text-sm font-medium">{member.name}</p>
                 <p className="text-xs font-muted-foreground">{member.name}</p>
               </div>
-              <Button className="ml-auto" variant="secondary" size="icon">
-                <MoreVerticalIcon className="size-4 text-muted-foreground" />
-              </Button>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild={true}>
+                  <Button className="ml-auto" variant="secondary" size="icon">
+                    <MoreVerticalIcon className="size-4 text-muted-foreground" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent side="bottom" align="end">
+                  <DropdownMenuItem
+                    className="font-medium"
+                    onClick={() => {}}
+                    disabled={false}
+                  >
+                    Set as Administrator
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    className="font-medium"
+                    onClick={() => {}}
+                    disabled={false}
+                  >
+                    Set as Member
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    className="font-medium text-amber-700"
+                    onClick={() => {}}
+                    disabled={false}
+                  >
+                    remove {member.name}
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
             {index < data.documents.length - 1 && (
               <Separator className="my-2.5" />
