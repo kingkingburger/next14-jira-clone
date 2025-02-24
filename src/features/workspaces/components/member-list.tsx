@@ -17,13 +17,35 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useDeleteMember } from "@/features/members/api/use-delete-member";
+import { useUpdateMember } from "@/features/members/api/use-update-member";
+import { MemberRole } from "@/features/members/types";
+import { useConfirm } from "@/hooks/use-confirm";
 
 export const MemberList = () => {
   const workspaceId = useWorkspaceId();
+  const [ConfirmDialog, confirm] = useConfirm(
+    "Remove member",
+    "This member will be removed from the workspace",
+    "destructive",
+  );
+
   const { data } = useGetMembers({ workspaceId });
+  const { mutate: deleteMember, isPending: isDeletingMember } =
+    useDeleteMember();
+  const { mutate: updateMember, isPending: isUpdatingMember } =
+    useUpdateMember();
+
+  const handleUpdateMember = (memberId: string, role: MemberRole) => {
+    updateMember({
+      json: { role },
+      param: { memberId },
+    });
+  };
 
   return (
     <Card className="w-full h-full border-none shadow-none">
+      <ConfirmDialog />
       <CardHeader className="flex flex-row items-center gap-x-4 p-7 space-y-0">
         <Button asChild={true} variant="secondary" size="sm">
           <Link href={`/workspaces/${workspaceId}`}>
@@ -64,7 +86,7 @@ export const MemberList = () => {
                     Set as Administrator
                   </DropdownMenuItem>
                   <DropdownMenuItem
-                    className="font-medium"
+                    className="font-medium text-amber-700"
                     onClick={() => {}}
                     disabled={false}
                   >
@@ -75,7 +97,7 @@ export const MemberList = () => {
                     onClick={() => {}}
                     disabled={false}
                   >
-                    remove {member.name}
+                    Remove {member.name}
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
