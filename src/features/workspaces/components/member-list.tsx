@@ -43,6 +43,20 @@ export const MemberList = () => {
     });
   };
 
+  const handleDeleteMember = async (memberId: string) => {
+    const ok = await confirm();
+    if (!ok) return;
+
+    deleteMember(
+      { param: { memberId } },
+      {
+        onSuccess: () => {
+          window.location.reload();
+        },
+      },
+    );
+  };
+
   return (
     <Card className="w-full h-full border-none shadow-none">
       <ConfirmDialog />
@@ -80,22 +94,26 @@ export const MemberList = () => {
                 <DropdownMenuContent side="bottom" align="end">
                   <DropdownMenuItem
                     className="font-medium"
-                    onClick={() => {}}
-                    disabled={false}
+                    onClick={() =>
+                      handleUpdateMember(member.$id, MemberRole.ADMIN)
+                    }
+                    disabled={isUpdatingMember}
                   >
                     Set as Administrator
                   </DropdownMenuItem>
                   <DropdownMenuItem
                     className="font-medium text-amber-700"
-                    onClick={() => {}}
-                    disabled={false}
+                    onClick={() =>
+                      handleUpdateMember(member.$id, MemberRole.MEMBER)
+                    }
+                    disabled={isUpdatingMember}
                   >
                     Set as Member
                   </DropdownMenuItem>
                   <DropdownMenuItem
                     className="font-medium text-amber-700"
-                    onClick={() => {}}
-                    disabled={false}
+                    onClick={() => handleDeleteMember(member.$id)}
+                    disabled={isDeletingMember}
                   >
                     Remove {member.name}
                   </DropdownMenuItem>
