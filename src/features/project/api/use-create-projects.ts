@@ -7,7 +7,7 @@ import { client } from "@/lib/rpc";
 type ResponseType = InferResponseType<(typeof client.api.projects)["$post"]>;
 type RequestType = InferRequestType<(typeof client.api.projects)["$post"]>;
 
-export const useCreateWorkSpaces = () => {
+export const useCreateProjects = () => {
   const queryClient = useQueryClient();
 
   const mutation = useMutation<ResponseType, Error, RequestType>({
