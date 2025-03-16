@@ -6,11 +6,13 @@ import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { useCreateProjectModal } from "@/features/project/hook/use-create-project-modal";
 
 export const Projects = () => {
   const projectId = null; // TODO: Use the useProject hook
 
   const pathname = usePathname();
+  const { open } = useCreateProjectModal();
   const workspaceId = useWorkspaceId();
   const { data } = useGetProjects({
     workspaceId: workspaceId,
@@ -21,7 +23,7 @@ export const Projects = () => {
       <div className="flex items-center justify-between">
         <p className="text-xs uppercase text-neutral-500">Projects</p>
         <RiAddCircleFill
-          onClick={() => {}}
+          onClick={open}
           className="size-5 text-neutral-500 cursor-pointer hover:opacity-75 transition"
         />
       </div>

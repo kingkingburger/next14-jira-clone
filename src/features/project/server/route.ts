@@ -6,7 +6,7 @@ import { sessionMiddleware } from "@/lib/session-middleware";
 import { zValidator } from "@hono/zod-validator";
 import { getMembers } from "@/features/members/util";
 import { DATABASE_ID, IMAGES_BUCKET_ID, PROJECT_ID } from "@/config";
-import { createProjectSchema } from "@/features/project/schema";
+import { createProjectSchema } from "@/features/project/schemas";
 
 const app = new Hono()
   .post(
