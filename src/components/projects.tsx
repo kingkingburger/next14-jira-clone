@@ -7,6 +7,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { useCreateProjectModal } from "@/features/project/hook/use-create-project-modal";
+import { ProjectAvatar } from "@/features/project/components/project-avatar";
 
 export const Projects = () => {
   const projectId = null; // TODO: Use the useProject hook
@@ -39,6 +40,7 @@ export const Projects = () => {
                 isActive && "bg-white shadow-sm hover:opacity-100 text-primary",
               )}
             >
+              <ProjectAvatar image={project.imageUrl} name={project.name} />
               <span className="truncate">{project.name}</span>
             </div>
           </Link>
