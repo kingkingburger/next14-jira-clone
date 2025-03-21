@@ -32,7 +32,7 @@ interface CreateProjectFormProps {
 
 export const CreateProjectForm = ({ onCancel }: CreateProjectFormProps) => {
   const workspaceId = useWorkspaceId();
-  const router = useRouter();
+  // const router = useRouter();
   const { mutate, isPending } = useCreateProjects();
   const inputRef = useRef<HTMLInputElement>(null);
 
