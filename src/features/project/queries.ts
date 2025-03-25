@@ -8,28 +8,26 @@ interface GetProjectProps {
 }
 
 export const getProject = async ({ projectId }: GetProjectProps) => {
-  try {
-    const { account, databases } = await createSessionClient();
-    const user = await account.get();
+  throw new Error("Test");
 
-    const project = await databases.getDocument<Project>(
-      DATABASE_ID,
-      PROJECT_ID,
-      projectId,
-    );
+  const { account, databases } = await createSessionClient();
+  const user = await account.get();
 
-    const member = await getMembers({
-      databases,
-      userId: user.$id,
-      workspaceId: project.workspaceId,
-    });
+  const project = await databases.getDocument<Project>(
+    DATABASE_ID,
+    PROJECT_ID,
+    projectId,
+  );
 
-    if (!member) {
-      return null;
-    }
+  const member = await getMembers({
+    databases,
+    userId: user.$id,
+    workspaceId: project.workspaceId,
+  });
 
-    return project;
-  } catch {
-    return null;
+  if (!member) {
+    throw new Error("Unauthorized");
   }
+
+  return project;
 };
