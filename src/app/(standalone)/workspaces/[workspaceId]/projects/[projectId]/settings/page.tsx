@@ -16,6 +16,6 @@ const ProjectIdSettingPage = async ({ params }: ProjectIdSettingPageProps) => {
     projectId: params.projectId,
   });
 
-  return <div> ProjectIdSettingPage</div>;
+  return <div className="w-full lg:max-w-xl"> ProjectIdSettingPage</div>;
 };
 export default ProjectIdSettingPage;
