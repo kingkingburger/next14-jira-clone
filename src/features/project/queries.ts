@@ -11,21 +11,25 @@ export const getProject = async ({ projectId }: GetProjectProps) => {
   const { account, databases } = await createSessionClient();
   const user = await account.get();
 
-  const project = await databases.getDocument<Project>(
-    DATABASE_ID,
-    PROJECT_ID,
-    projectId,
-  );
+  try {
+    const project = await databases.getDocument<Project>(
+      DATABASE_ID,
+      PROJECT_ID,
+      projectId,
+    );
 
-  const member = await getMembers({
-    databases,
-    userId: user.$id,
-    workspaceId: project.workspaceId,
-  });
+    const member = await getMembers({
+      databases,
+      userId: user.$id,
+      workspaceId: project.workspaceId,
+    });
 
-  if (!member) {
-    throw new Error("Unauthorized");
+    if (!member) {
+      throw new Error("Unauthorized");
+    }
+
+    return project;
+  } catch (error) {
+    console.error(error);
   }
-
-  return project;
 };
