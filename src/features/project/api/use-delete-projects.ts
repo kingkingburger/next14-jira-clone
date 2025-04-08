@@ -14,7 +14,6 @@ type RequestType = InferRequestType<
 >;
 
 export const useDeleteProjects = () => {
-  const router = useRouter();
   const queryClient = useQueryClient();
 
   const mutation = useMutation<ResponseType, Error, RequestType>({
