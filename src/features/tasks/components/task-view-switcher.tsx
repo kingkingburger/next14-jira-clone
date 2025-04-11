@@ -1,4 +1,6 @@
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Button } from "@/components/ui/button";
+import { PlusIcon } from "lucide-react";
 
 export const TaskViewSwitcher = () => {
   return (
@@ -16,6 +18,10 @@ export const TaskViewSwitcher = () => {
               calendar
             </TabsTrigger>
           </TabsList>
+          <Button size="sm" className="w-full lg:w-auto">
+            <PlusIcon className="size-4 mr-2" />
+            New
+          </Button>
         </div>
       </div>
     </Tabs>
