@@ -40,4 +40,11 @@ export const CreateTaskFormWrapper = ({ onCancel }: CreateTaskFormWrapper) => {
       </Card>
     );
   }
+
+  return (
+    <div>
+      {JSON.stringify(projects)}
+      {JSON.stringify(memberOptions)}
+    </div>
+  );
 };
