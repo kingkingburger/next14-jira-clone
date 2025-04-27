@@ -4,6 +4,7 @@ import { useGetMembers } from "@/features/members/api/use-get-members";
 import { Card, CardContent } from "@/components/ui/card";
 import React from "react";
 import { Loader } from "lucide-react";
+import { CreateTaskForm } from "@/features/tasks/components/create-task-form";
 
 interface CreateTaskFormWrapper {
   onCancel: () => void;
@@ -42,9 +43,9 @@ export const CreateTaskFormWrapper = ({ onCancel }: CreateTaskFormWrapper) => {
   }
 
   return (
-    <div>
-      {JSON.stringify(projects)}
-      {JSON.stringify(memberOptions)}
-    </div>
+    <CreateTaskForm
+      projectOptions={projectOptions ?? []}
+      memberOptions={memberOptions ?? []}
+    />
   );
 };
