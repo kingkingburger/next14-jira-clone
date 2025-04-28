@@ -1,14 +1,10 @@
 "use client";
 
 import { z } from "zod";
-import Image from "next/image";
 import { useForm } from "react-hook-form";
 import React, { useRef } from "react";
-import { ImageIcon } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -83,6 +79,17 @@ export const CreateTaskForm = ({
                     <FormControl>
                       <Input {...field} placeholder="Enter task name" />
                     </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="dueDate"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Due Date</FormLabel>
+                    <FormControl>{/*TODO: date picker */}</FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
