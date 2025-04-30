@@ -30,6 +30,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { MembersAvatar } from "@/features/members/components/members-avatar";
+import { TaskStatus } from "@/features/tasks/types";
 
 interface CreateTaskFormProps {
   onCancel?: () => void;
@@ -138,7 +139,39 @@ export const CreateTaskForm = ({
                   </FormItem>
                 )}
               />
-
+              <FormField
+                control={form.control}
+                name="status"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Status</FormLabel>
+                    <Select
+                      defaultValue={field.value}
+                      onValueChange={field.onChange}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="select status" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <FormMessage />
+                      <SelectContent>
+                        <SelectItem value={TaskStatus.BACKLOG}>
+                          Backlog
+                        </SelectItem>
+                        <SelectItem value={TaskStatus.IN_PROGRESS}>
+                          In Progress
+                        </SelectItem>
+                        <SelectItem value={TaskStatus.IN_PREVIEW}>
+                          In Preview
+                        </SelectItem>
+                        <SelectItem value={TaskStatus.TODO}>Todo</SelectItem>
+                        <SelectItem value={TaskStatus.DONE}>Done</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </FormItem>
+                )}
+              />
               <DottedSeparator className="py-7" />
               <div className="flex items-center justify-between">
                 <Button
