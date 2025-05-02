@@ -19,7 +19,7 @@ export const useCreateTasks = () => {
       return await response.json();
     },
     onSuccess: () => {
-      toast.success("Project created");
+      toast.success("Task created");
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
     },
     onError: () => {
