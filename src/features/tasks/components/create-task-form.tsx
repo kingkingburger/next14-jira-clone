@@ -31,6 +31,7 @@ import {
 } from "@/components/ui/select";
 import { MembersAvatar } from "@/features/members/components/members-avatar";
 import { TaskStatus } from "@/features/tasks/types";
+import { ProjectAvatar } from "@/features/project/components/project-avatar";
 
 interface CreateTaskFormProps {
   onCancel?: () => void;
@@ -167,6 +168,40 @@ export const CreateTaskForm = ({
                         </SelectItem>
                         <SelectItem value={TaskStatus.TODO}>Todo</SelectItem>
                         <SelectItem value={TaskStatus.DONE}>Done</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="projectId"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Project</FormLabel>
+                    <Select
+                      defaultValue={field.value}
+                      onValueChange={field.onChange}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="select project" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <FormMessage />
+                      <SelectContent>
+                        {projectOptions.map((project) => (
+                          <SelectItem key={project.id} value={project.id}>
+                            <div className="flex items-center gap-x-2">
+                              <ProjectAvatar
+                                className="size-6"
+                                name={project.name}
+                                image={project.imageUrl}
+                              />
+                              {project.name}
+                            </div>
+                          </SelectItem>
+                        ))}
                       </SelectContent>
                     </Select>
                   </FormItem>
