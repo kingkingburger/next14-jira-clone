@@ -5,9 +5,16 @@ import { Button } from "@/components/ui/button";
 import { PlusIcon } from "lucide-react";
 import { DottedSeparator } from "@/components/dotted-separator";
 import { useCreateTaskModal } from "@/features/tasks/hooks/use-create-task-modal";
+import { useGetTasks } from "@/features/tasks/api/use-get-tasks";
+import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 
 export const TaskViewSwitcher = () => {
+  const workspaceId = useWorkspaceId();
   const { open } = useCreateTaskModal();
+
+  const { data: tasks, isLoading: isLoadingTasks } = useGetTasks({
+    workspaceId: workspaceId,
+  });
 
   return (
     <Tabs className="flex-1 w-full border rounded-lg">
