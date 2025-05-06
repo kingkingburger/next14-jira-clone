@@ -41,13 +41,13 @@ export const TaskViewSwitcher = () => {
         <DottedSeparator className="my-4" />
         <>
           <TabsContent value="table" className="mt-0">
-            Data table
+            {JSON.stringify(tasks)}
           </TabsContent>
           <TabsContent value="kanban" className="mt-0">
-            Data kanban
+            {JSON.stringify(tasks)}
           </TabsContent>
           <TabsContent value="calendar" className="mt-0">
-            Data calendar
+            {JSON.stringify(tasks)}
           </TabsContent>
         </>
       </div>
