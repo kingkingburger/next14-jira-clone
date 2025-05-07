@@ -7,8 +7,13 @@ import { DottedSeparator } from "@/components/dotted-separator";
 import { useCreateTaskModal } from "@/features/tasks/hooks/use-create-task-modal";
 import { useGetTasks } from "@/features/tasks/api/use-get-tasks";
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
+import { useQueryState } from "nuqs";
 
 export const TaskViewSwitcher = () => {
+  const [view, setView] = useQueryState("task-view", {
+    defaultValue: "table",
+  });
+
   const workspaceId = useWorkspaceId();
   const { open } = useCreateTaskModal();
 
@@ -17,7 +22,11 @@ export const TaskViewSwitcher = () => {
   });
 
   return (
-    <Tabs className="flex-1 w-full border rounded-lg">
+    <Tabs
+      defaultValue={view}
+      onValueChange={setView}
+      className="flex-1 w-full border rounded-lg"
+    >
       <div className="h-full flex flex-col overflow-auto p-4">
         <div className="flex flex-col gap-y-2 lg:flex-row justify-between items-center">
           <TabsList className="w-full lg:w-auto">
