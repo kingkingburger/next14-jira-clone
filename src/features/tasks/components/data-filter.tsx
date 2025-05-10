@@ -17,4 +17,18 @@ export const DataFilters = ({ hideProjectFilter }: DataFiltersProps) => {
   });
 
   const isLoading = isLoadingProjects || isLoadingMembers;
+
+  const projectOptions = projects?.documents.map((project) => ({
+    value: project.$id,
+    label: project.name,
+  }));
+
+  const memberOptions = projects?.documents.map((member) => ({
+    value: member.$id,
+    label: member.name,
+  }));
+
+  if (isLoading) return null;
+
+  return <div className="flex flex-col lg:flex-row gap-2"></div>;
 };
