@@ -1,4 +1,3 @@
-import { useGetWorkspaces } from "@/features/workspaces/api/use-get-workspaces";
 import { useGetProjects } from "@/features/project/api/use-get-projects";
 import { useGetMembers } from "@/features/members/api/use-get-members";
 import {
@@ -9,22 +8,23 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { ListChecksIcon } from "lucide-react";
+import { ListChecksIcon, UserIcon } from "lucide-react";
 import { TaskStatus } from "@/features/tasks/types";
 import { useTaskFilters } from "@/features/tasks/hooks/use-task-filters";
+import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 
 interface DataFiltersProps {
   hideProjectFilter?: boolean;
 }
 
 export const DataFilters = ({ hideProjectFilter }: DataFiltersProps) => {
-  const workspaceId = useGetWorkspaces();
+  const workspaceId = useWorkspaceId();
 
   const { data: projects, isLoading: isLoadingProjects } = useGetProjects({
-    workspaceId: workspaceId,
+    workspaceId,
   });
   const { data: members, isLoading: isLoadingMembers } = useGetMembers({
-    workspaceId: workspaceId,
+    workspaceId,
   });
 
   const isLoading = isLoadingProjects || isLoadingMembers;
@@ -43,11 +43,14 @@ export const DataFilters = ({ hideProjectFilter }: DataFiltersProps) => {
     useTaskFilters();
 
   const onStatusChange = (value: string) => {
-    if (value === "all") {
-      setFilters({ status: null });
-    } else {
-      setFilters({ status: value as TaskStatus });
-    }
+    setFilters({ status: value === "all" ? null : (value as TaskStatus) });
+  };
+  const onAssigneeChange = (value: string) => {
+    setFilters({ assigneeId: value === "all" ? null : (value as string) });
+  };
+
+  const onProjectChange = (value: string) => {
+    setFilters({ projectId: value === "all" ? null : (value as string) });
   };
 
   if (isLoading) return null;
@@ -74,6 +77,28 @@ export const DataFilters = ({ hideProjectFilter }: DataFiltersProps) => {
           <SelectItem value={TaskStatus.IN_PREVIEW}>In Review</SelectItem>
           <SelectItem value={TaskStatus.TODO}>Todo</SelectItem>
           <SelectItem value={TaskStatus.DONE}>Done</SelectItem>
+        </SelectContent>
+      </Select>
+      <Select
+        defaultValue={assigneeId ?? undefined}
+        onValueChange={(value) => {
+          onAssigneeChange(value);
+        }}
+      >
+        <SelectTrigger className="w-full lg:w-auto h-8">
+          <div className="flex items-center pr-2">
+            <UserIcon className="size-4 mr-2" />
+            <SelectValue placeholder="All assignee" />
+          </div>
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="all">All assignees</SelectItem>
+          <SelectSeparator />
+          {memberOptions?.map((member) => (
+            <SelectItem key={member.value} value={member.value}>
+              {member.label}
+            </SelectItem>
+          ))}
         </SelectContent>
       </Select>
     </div>
