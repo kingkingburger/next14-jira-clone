@@ -8,7 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { ListChecksIcon, UserIcon } from "lucide-react";
+import { FolderIcon, ListChecksIcon, UserIcon } from "lucide-react";
 import { TaskStatus } from "@/features/tasks/types";
 import { useTaskFilters } from "@/features/tasks/hooks/use-task-filters";
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
@@ -97,6 +97,28 @@ export const DataFilters = ({ hideProjectFilter }: DataFiltersProps) => {
           {memberOptions?.map((member) => (
             <SelectItem key={member.value} value={member.value}>
               {member.label}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+      <Select
+        defaultValue={projectId ?? undefined}
+        onValueChange={(value) => {
+          onProjectChange(value);
+        }}
+      >
+        <SelectTrigger className="w-full lg:w-auto h-8">
+          <div className="flex items-center pr-2">
+            <FolderIcon className="size-4 mr-2" />
+            <SelectValue placeholder="All project" />
+          </div>
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="all">All assignees</SelectItem>
+          <SelectSeparator />
+          {projectOptions?.map((project) => (
+            <SelectItem key={project.value} value={project.value}>
+              {project.label}
             </SelectItem>
           ))}
         </SelectContent>
