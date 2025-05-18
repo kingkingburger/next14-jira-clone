@@ -25,7 +25,7 @@ export const CreateTaskFormWrapper = ({ onCancel }: CreateTaskFormWrapper) => {
     imageUrl: project.imageUrl,
   }));
 
-  const memberOptions = projects?.documents.map((project) => ({
+  const memberOptions = members?.documents.map((project) => ({
     id: project.$id,
     name: project.name,
   }));
