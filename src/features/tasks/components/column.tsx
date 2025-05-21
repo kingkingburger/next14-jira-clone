@@ -6,6 +6,6 @@ import { Task } from "@/features/tasks/types";
 export const columns: ColumnDef<Task>[] = [
   {
     accessorKey: "name",
-    header: "Name",
+    header: "Task Name",
   },
 ];
