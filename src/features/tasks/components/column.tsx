@@ -6,6 +6,7 @@ import { ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProjectAvatar } from "@/features/project/components/project-avatar";
 import { MembersAvatar } from "@/features/members/components/members-avatar";
+import { TaskDate } from "./task-date";
 
 export const columns: ColumnDef<Task>[] = [
   {
