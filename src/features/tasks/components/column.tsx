@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { ProjectAvatar } from "@/features/project/components/project-avatar";
 import { MembersAvatar } from "@/features/members/components/members-avatar";
 import { TaskDate } from "./task-date";
+import { Badge } from "@/components/ui/badge";
 
 export const columns: ColumnDef<Task>[] = [
   {
@@ -101,6 +102,25 @@ export const columns: ColumnDef<Task>[] = [
       const dueDate = row.original.dueDate;
 
       return <TaskDate value={dueDate} />;
+    },
+  },
+  {
+    accessorKey: "status",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Status
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+    cell: ({ row }) => {
+      const status = row.original.status;
+
+      return <Badge>{status}</Badge>;
     },
   },
 ];
