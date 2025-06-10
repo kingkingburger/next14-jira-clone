@@ -23,9 +23,8 @@ export const TaskActions = ({ id, projectId, children }: TaskActionsProps) => {
             diable={false}
             className="font-medium p-[10px]"
           >
-            <ExternalLinkIcon className="size-4 mr-2 stroke-2">
-              Task Detail
-            </ExternalLinkIcon>
+            <ExternalLinkIcon className="size-4 mr-2 stroke-2" />
+            Task Detail
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
