@@ -4,7 +4,7 @@ import {
   DropdownMenuTrigger,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
-import { ExternalLinkIcon } from "lucide-react";
+import { ExternalLinkIcon, PencilIcon } from "lucide-react";
 
 interface TaskActionsProps {
   id: string;
@@ -20,11 +20,19 @@ export const TaskActions = ({ id, projectId, children }: TaskActionsProps) => {
         <DropdownMenuContent align="end" className="w-48">
           <DropdownMenuItem
             onClick={() => {}}
-            diable={false}
+            disabled={false}
             className="font-medium p-[10px]"
           >
             <ExternalLinkIcon className="size-4 mr-2 stroke-2" />
             Task Detail
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => {}}
+            disabled={false}
+            className="font-medium p-[10px]"
+          >
+            <PencilIcon className="size-4 mr-2 stroke-2" />
+            Edit Task
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
