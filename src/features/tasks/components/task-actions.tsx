@@ -39,8 +39,16 @@ export const TaskActions = ({ id, projectId, children }: TaskActionsProps) => {
             disabled={false}
             className="font-medium p-[10px]"
           >
-            <PencilIcon className="size-4 mr-2 stroke-2" />
+            <ExternalLinkIcon className="size-4 mr-2 stroke-2" />
             Open Project
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => {}}
+            disabled={false}
+            className="font-amber focus:text-amber-700 p-[10px]"
+          >
+            <ExternalLinkIcon className="size-4 mr-2 stroke-2" />
+            Delete Task
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
