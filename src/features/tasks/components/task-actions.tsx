@@ -4,7 +4,7 @@ import {
   DropdownMenuTrigger,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
-import { ExternalLinkIcon, PencilIcon } from "lucide-react";
+import { ExternalLinkIcon, PencilIcon, TrashIcon } from "lucide-react";
 
 interface TaskActionsProps {
   id: string;
@@ -47,7 +47,7 @@ export const TaskActions = ({ id, projectId, children }: TaskActionsProps) => {
             disabled={false}
             className="font-amber focus:text-amber-700 p-[10px]"
           >
-            <ExternalLinkIcon className="size-4 mr-2 stroke-2" />
+            <TrashIcon className="size-4 mr-2 stroke-2" />
             Delete Task
           </DropdownMenuItem>
         </DropdownMenuContent>
