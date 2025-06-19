@@ -11,6 +11,30 @@ import { createAdminClient } from "@/lib/appwrite";
 import { Project } from "@/features/project/type/types";
 
 const app = new Hono()
+  .delete("/:taskId", sessionMiddleware, async (c) => {
+    const user = c.get("user");
+    const databases = c.get("databases");
+    const { taskId } = c.req.param();
+
+    const task = await databases.getDocument<Task>(
+      DATABASE_ID,
+      TASKS_ID,
+      taskId,
+    );
+    const member = await getMembers({
+      databases,
+      workspaceId: task.workspaceId,
+      userId: user.$id,
+    });
+
+    if (!member) {
+      return c.json({ error: "Unauthorized" }, 400);
+    }
+
+    await databases.deleteDocument(DATABASE_ID, TASKS_ID, taskId);
+
+    return c.json({ data: { $id: task.$id } });
+  })
   .get(
     "/",
     sessionMiddleware,
