@@ -5,6 +5,7 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import { ExternalLinkIcon, PencilIcon, TrashIcon } from "lucide-react";
+import { useConfirm } from "@/hooks/use-confirm";
 
 interface TaskActionsProps {
   id: string;
@@ -13,6 +14,11 @@ interface TaskActionsProps {
 }
 
 export const TaskActions = ({ id, projectId, children }: TaskActionsProps) => {
+  const [ConfirmDialog, confirm] = useConfirm(
+    "Delete task",
+    "This action cannot be undone",
+    "destructive",
+  );
   return (
     <div className="flex justify-end">
       <DropdownMenu modal={false}>
