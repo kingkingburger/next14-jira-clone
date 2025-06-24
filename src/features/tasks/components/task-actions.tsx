@@ -23,6 +23,13 @@ export const TaskActions = ({ id, projectId, children }: TaskActionsProps) => {
 
   const { mutate, isPending } = useDeleteTask();
 
+  const onDelete = async () => {
+    const ok = await confirm();
+    if (!ok) return;
+
+    mutate({ param: { taskId: id } });
+  };
+
   return (
     <div className="flex justify-end">
       <DropdownMenu modal={false}>
