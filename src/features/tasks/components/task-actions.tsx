@@ -32,6 +32,7 @@ export const TaskActions = ({ id, projectId, children }: TaskActionsProps) => {
 
   return (
     <div className="flex justify-end">
+      <ConfirmDialog />
       <DropdownMenu modal={false}>
         <DropdownMenuTrigger asChild>{children}</DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-48">
