@@ -8,6 +8,7 @@ import { ExternalLinkIcon, PencilIcon, TrashIcon } from "lucide-react";
 import { useConfirm } from "@/hooks/use-confirm";
 import { useDeleteTask } from "@/features/tasks/api/use-delete-task";
 import { useRouter } from "next/navigation";
+import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 
 interface TaskActionsProps {
   id: string;
@@ -16,6 +17,7 @@ interface TaskActionsProps {
 }
 
 export const TaskActions = ({ id, projectId, children }: TaskActionsProps) => {
+  const workspaceId = useWorkspaceId();
   const router = useRouter();
 
   const [ConfirmDialog, confirm] = useConfirm(
