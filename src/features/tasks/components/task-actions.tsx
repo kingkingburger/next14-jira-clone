@@ -7,6 +7,7 @@ import {
 import { ExternalLinkIcon, PencilIcon, TrashIcon } from "lucide-react";
 import { useConfirm } from "@/hooks/use-confirm";
 import { useDeleteTask } from "@/features/tasks/api/use-delete-task";
+import { useRouter } from "next/navigation";
 
 interface TaskActionsProps {
   id: string;
@@ -15,6 +16,8 @@ interface TaskActionsProps {
 }
 
 export const TaskActions = ({ id, projectId, children }: TaskActionsProps) => {
+  const router = useRouter();
+
   const [ConfirmDialog, confirm] = useConfirm(
     "Delete task",
     "This action cannot be undone.",
@@ -28,6 +31,14 @@ export const TaskActions = ({ id, projectId, children }: TaskActionsProps) => {
     if (!ok) return;
 
     mutate({ param: { taskId: id } });
+  };
+
+  const onOpenTask = () => {
+    router.push(`/workspaces/${workspaceId}/tasks/${id}`);
+  };
+
+  const onOpenProject = () => {
+    router.push(`/workspaces/${workspaceId}/projects/${projectId}`);
   };
 
   return (
