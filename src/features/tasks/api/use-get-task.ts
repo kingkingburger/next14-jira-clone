@@ -1,12 +1,11 @@
-import { useQuery } from "@tanstack/react-query";
-
 import { client } from "@/lib/rpc";
+import { useQuery } from "@tanstack/react-query";
 
 interface UseGetTaskProps {
   taskId: string;
 }
 
-export const useGetTasks = ({ taskId }: UseGetTaskProps) => {
+export const useGetTask = ({ taskId }: UseGetTaskProps) => {
   const query = useQuery({
     queryKey: ["task", taskId],
     queryFn: async () => {

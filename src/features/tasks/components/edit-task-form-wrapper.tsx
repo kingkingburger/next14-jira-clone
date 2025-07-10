@@ -4,6 +4,7 @@ import { useGetMembers } from "@/features/members/api/use-get-members";
 import { Card, CardContent } from "@/components/ui/card";
 import React from "react";
 import { Loader } from "lucide-react";
+import { useGetTask } from "@/features/tasks/api/use-get-task";
 
 interface EditTaskFormWrapper {
   onCancel: () => void;
@@ -12,6 +13,10 @@ interface EditTaskFormWrapper {
 
 export const EditTaskFormWrapper = ({ onCancel , id}: EditTaskFormWrapper) => {
   const workspaceId = useWorkspaceId();
+
+  const { data: initializeValues, isLoading: isLoadingTask} = useGetTask({
+    taskId: id
+  })
   const { data: projects, isLoading: isLoadingProjects } = useGetProjects({
     workspaceId,
   });
@@ -30,7 +35,7 @@ export const EditTaskFormWrapper = ({ onCancel , id}: EditTaskFormWrapper) => {
     name: project.name,
   }));
 
-  const isLoading = isLoadingProjects || isLoadingMembers;
+  const isLoading = isLoadingProjects || isLoadingMembers || isLoadingTask;
 
   if (isLoading) {
     return (
