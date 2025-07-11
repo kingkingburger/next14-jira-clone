@@ -5,18 +5,19 @@ import { Card, CardContent } from "@/components/ui/card";
 import React from "react";
 import { Loader } from "lucide-react";
 import { useGetTask } from "@/features/tasks/api/use-get-task";
+import { CreateTaskForm } from "@/features/tasks/components/create-task-form";
 
 interface EditTaskFormWrapper {
   onCancel: () => void;
   id: string;
 }
 
-export const EditTaskFormWrapper = ({ onCancel , id}: EditTaskFormWrapper) => {
+export const EditTaskFormWrapper = ({ onCancel, id }: EditTaskFormWrapper) => {
   const workspaceId = useWorkspaceId();
 
-  const { data: initializeValues, isLoading: isLoadingTask} = useGetTask({
-    taskId: id
-  })
+  const { data: initializeValues, isLoading: isLoadingTask } = useGetTask({
+    taskId: id,
+  });
   const { data: projects, isLoading: isLoadingProjects } = useGetProjects({
     workspaceId,
   });
@@ -52,10 +53,10 @@ export const EditTaskFormWrapper = ({ onCancel , id}: EditTaskFormWrapper) => {
   }
 
   return (
-    // <EditTaskForm
-    //   onCancel={onCancel}
-    //   projectOptions={projectOptions ?? []}
-    //   memberOptions={memberOptions ?? []}
-    // />
+    <CreateTaskForm
+      onCancel={onCancel}
+      projectOptions={projectOptions ?? []}
+      memberOptions={memberOptions ?? []}
+    />
   );
 };
