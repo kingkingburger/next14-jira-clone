@@ -47,6 +47,10 @@ export const EditTaskFormWrapper = ({ onCancel , id}: EditTaskFormWrapper) => {
     );
   }
 
+  if (!initializeValues) {
+    return null;
+  }
+
   return (
     // <EditTaskForm
     //   onCancel={onCancel}
