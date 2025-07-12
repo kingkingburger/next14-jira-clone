@@ -44,6 +44,7 @@ export const EditTaskForm = ({
   onCancel,
   projectOptions,
   memberOptions,
+  initialValue,
 }: EditTaskFormProps) => {
   const workspaceId = useWorkspaceId();
   const router = useRouter();
@@ -55,7 +56,10 @@ export const EditTaskForm = ({
       createTaskSchema.omit({ workspaceId: true, description: true }),
     ),
     defaultValues: {
-      workspaceId: workspaceId,
+      ...initialValue,
+      dueDate: initialValue.dueDate
+        ? new Date(initialValue.dueDate)
+        : undefined,
     },
   });
 
