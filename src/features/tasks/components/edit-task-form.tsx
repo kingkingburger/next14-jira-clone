@@ -20,7 +20,6 @@ import {
 import { cn } from "@/lib/utils";
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 import { createTaskSchema } from "@/features/tasks/schemas";
-import { useCreateTasks } from "@/features/tasks/api/use-create-task";
 import { DatePicker } from "@/components/date-picker";
 import {
   Select,
@@ -32,6 +31,7 @@ import {
 import { MembersAvatar } from "@/features/members/components/members-avatar";
 import { Task, TaskStatus } from "@/features/tasks/types";
 import { ProjectAvatar } from "@/features/project/components/project-avatar";
+import { useUpdateTasks } from "@/features/tasks/api/use-update-task";
 
 interface EditTaskFormProps {
   onCancel?: () => void;
@@ -48,7 +48,7 @@ export const EditTaskForm = ({
 }: EditTaskFormProps) => {
   const workspaceId = useWorkspaceId();
   const router = useRouter();
-  const { mutate, isPending } = useCreateTasks();
+  const { mutate, isPending } = useUpdateTasks();
   const inputRef = useRef<HTMLInputElement>(null);
 
   const form = useForm<z.infer<typeof createTaskSchema>>({
