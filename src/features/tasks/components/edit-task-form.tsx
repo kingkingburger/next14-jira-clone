@@ -37,14 +37,14 @@ interface EditTaskFormProps {
   onCancel?: () => void;
   projectOptions: { id: string; name: string; imageUrl: string }[];
   memberOptions: { id: string; name: string }[];
-  initialValue: Task;
+  initialValues: Task;
 }
 
 export const EditTaskForm = ({
   onCancel,
   projectOptions,
   memberOptions,
-  initialValue,
+  initialValues,
 }: EditTaskFormProps) => {
   const workspaceId = useWorkspaceId();
   const router = useRouter();
@@ -56,16 +56,16 @@ export const EditTaskForm = ({
       createTaskSchema.omit({ workspaceId: true, description: true }),
     ),
     defaultValues: {
-      ...initialValue,
-      dueDate: initialValue.dueDate
-        ? new Date(initialValue.dueDate)
+      ...initialValues,
+      dueDate: initialValues.dueDate
+        ? new Date(initialValues.dueDate)
         : undefined,
     },
   });
 
   const onSubmit = (values: z.infer<typeof createTaskSchema>) => {
     mutate(
-      { json: { ...values, workspaceId } },
+      { json: values, param: { taskId: initialValues.$id } },
       {
         onSuccess: () => {
           form.reset();
