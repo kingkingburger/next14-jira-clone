@@ -69,7 +69,7 @@ export const TaskActions = ({ id, projectId, children }: TaskActionsProps) => {
             Open Project
           </DropdownMenuItem>
           <DropdownMenuItem
-            onClick={() => {}}
+            onClick={() => open(id)}
             disabled={false}
             className="font-medium p-[10px]"
           >
