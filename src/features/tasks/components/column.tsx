@@ -28,7 +28,7 @@ export const columns: ColumnDef<Task>[] = [
     cell: ({ row }) => {
       const name = row.original.name;
 
-      return <p className="line-clamp-1"></p>;
+      return <p className="line-clamp-1">{name}</p>;
     },
   },
   {
