@@ -8,6 +8,10 @@ const boards: TaskStatus[] = [
   TaskStatus.DONE,
 ];
 
+type TasksState = {
+  [key in TaskStatus]: Task[];
+};
+
 interface DataKanbanProps {
   data: Task[];
 }
