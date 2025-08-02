@@ -1,5 +1,6 @@
 import { Task, TaskStatus } from "@/features/tasks/types";
 import { useState } from "react";
+import { DragDropContext } from "@hello-pangea/dnd";
 
 const boards: TaskStatus[] = [
   TaskStatus.BACKLOG,
@@ -40,5 +41,20 @@ export const DataKanban: React.FC<DataKanbanProps> = ({
 
     return initialTasks;
   });
-  return <div>Data Kanban</div>;
+  return (
+    <DragDropContext onDragEnd={() => {}}>
+      <div className="flex overflow-x-auto">
+        {boards.map((board) => {
+          return (
+            <div
+              key={board}
+              className="flex-1 mx-2 bg-muted p-1.5 rounded-md min-w-[200px]"
+            >
+              {board}
+            </div>
+          );
+        })}
+      </div>
+    </DragDropContext>
+  );
 };
