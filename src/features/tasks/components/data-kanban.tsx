@@ -50,7 +50,10 @@ export const DataKanban: React.FC<DataKanbanProps> = ({
               key={board}
               className="flex-1 mx-2 bg-muted p-1.5 rounded-md min-w-[200px]"
             >
-              {board}
+              <KanbanColumnHeader
+                board={board}
+                taskCount={tasks[board].length}
+              />
             </div>
           );
         })}
