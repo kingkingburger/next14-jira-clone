@@ -1,10 +1,17 @@
 import { TaskStatus } from "@/features/tasks/types";
 import { snakeCaseToTitleCase } from "@/lib/utils";
+import { CircleDashedIcon } from "lucide-react";
 
 interface KanbanColumnHeaderProps {
   board: TaskStatus;
   taskCount: number;
 }
+
+const statusIconMap: Record<TaskStatus, React.ReactNode> = {
+  [TaskStatus.BACKLOG]: (
+    <CircleDashedIcon className="size-[18px] text-pink-400" />
+  ),
+};
 
 export const KanbanColumnHeader = ({
   board,
