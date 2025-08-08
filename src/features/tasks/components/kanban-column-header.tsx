@@ -11,6 +11,16 @@ const statusIconMap: Record<TaskStatus, React.ReactNode> = {
   [TaskStatus.BACKLOG]: (
     <CircleDashedIcon className="size-[18px] text-pink-400" />
   ),
+  [TaskStatus.TODO]: <CircleDashedIcon className="size-[18px] text-red-400" />,
+  [TaskStatus.IN_PROGRESS]: (
+    <CircleDashedIcon className="size-[18px] text-yellow-400" />
+  ),
+  [TaskStatus.IN_PREVIEW]: (
+    <CircleDashedIcon className="size-[18px] text-blue-400" />
+  ),
+  [TaskStatus.DONE]: (
+    <CircleDashedIcon className="size-[18px] text-emerald-400" />
+  ),
 };
 
 export const KanbanColumnHeader = ({
