@@ -6,7 +6,9 @@ import {
   CircleDotDashedIcon,
   CircleDotIcon,
   CircleCheckIcon,
+  PlusIcon,
 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface KanbanColumnHeaderProps {
   board: TaskStatus;
@@ -44,6 +46,9 @@ export const KanbanColumnHeader = ({
           {taskCount}
         </div>
       </div>
+      <Button onClick={() => {}} variant="ghost" size="icon" className="size-5">
+        <PlusIcon className="size-4 text-neutral-500" />
+      </Button>
     </div>
   );
 };
