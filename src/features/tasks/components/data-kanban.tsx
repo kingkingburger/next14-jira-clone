@@ -1,6 +1,6 @@
 import { Task, TaskStatus } from "@/features/tasks/types";
 import { useState } from "react";
-import { DragDropContext } from "@hello-pangea/dnd";
+import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
 import { KanbanColumnHeader } from "@/features/tasks/components/kanban-column-header";
 
 const boards: TaskStatus[] = [
@@ -45,7 +45,7 @@ export const DataKanban: React.FC<DataKanbanProps> = ({
   return (
     <DragDropContext onDragEnd={() => {}}>
       <div className="flex overflow-x-auto">
-        {boards.map((board) => {
+        {boards.map((board: TaskStatus) => {
           return (
             <div
               key={board}
@@ -55,6 +55,33 @@ export const DataKanban: React.FC<DataKanbanProps> = ({
                 board={board}
                 taskCount={tasks[board].length}
               />
+              <Droppable droppableId={board}>
+                {(provided) => (
+                  <div
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}
+                    className="min-h-[200px] py-1.5"
+                  >
+                    {tasks[board].map((task, index) => (
+                      <Draggable
+                        key={task.$id}
+                        draggableId={task.$id}
+                        index={index}
+                      >
+                        {(provided) => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                          >
+                            {task.name}
+                          </div>
+                        )}
+                      </Draggable>
+                    ))}
+                  </div>
+                )}
+              </Droppable>
             </div>
           );
         })}
