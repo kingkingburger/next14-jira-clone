@@ -74,7 +74,7 @@ export const DataKanban: React.FC<DataKanbanProps> = ({
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
                           >
-                            {task.name}
+                            <KanbanCard task={task} />
                           </div>
                         )}
                       </Draggable>
