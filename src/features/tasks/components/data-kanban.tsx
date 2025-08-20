@@ -2,6 +2,7 @@ import { Task, TaskStatus } from "@/features/tasks/types";
 import { useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
 import { KanbanColumnHeader } from "@/features/tasks/components/kanban-column-header";
+import { KanbanCard } from "@/features/tasks/components/kanban-card";
 
 const boards: TaskStatus[] = [
   TaskStatus.BACKLOG,
