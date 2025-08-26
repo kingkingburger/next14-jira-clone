@@ -4,6 +4,7 @@ import { MoreHorizontal } from "lucide-react";
 import { DottedSeparator } from "@/components/dotted-separator";
 import { MembersAvatar } from "@/features/members/components/members-avatar";
 import { TaskDate } from "@/features/tasks/components/task-date";
+import { ProjectAvatar } from "@/features/project/components/project-avatar";
 
 interface KanbanCardProps {
   task: Task;
@@ -26,6 +27,15 @@ export const KanbanCard = ({ task }: KanbanCardProps) => {
         />
         <div className="size-1 rounded-full bg-neutral-300" />
         <TaskDate value={task.dueDate} className="text-xs" />
+      </div>
+      <div className="flex items-center gap-x-1.5">
+        <ProjectAvatar
+          name={task.project.name}
+          image={task.project.imageUrl}
+          className="size-4"
+          fallbackClassName="text-[10px]"
+        />
+        <span className="text-xs font-medium">{task.project.name}</span>
       </div>
     </div>
   );
