@@ -80,6 +80,7 @@ export const DataKanban: React.FC<DataKanbanProps> = ({
                         )}
                       </Draggable>
                     ))}
+                    {provided.placeholder}
                   </div>
                 )}
               </Droppable>
