@@ -85,7 +85,7 @@ export const DataKanban: React.FC<DataKanbanProps> = ({
       const sourceStatus = source.droppableId as TaskStatus;
       const destStatus = destination?.droppableId as TaskStatus;
 
-      const updatesPayload: {
+      let updatesPayload: {
         $id: string;
         status: TaskStatus;
         position: number;
@@ -119,7 +119,7 @@ export const DataKanban: React.FC<DataKanbanProps> = ({
         newTasks[destStatus] = destColumn;
 
         // Prepare minimal update payloads
-        // updatesPayload = [];
+        updatesPayload = [];
 
         updatesPayload.push({
           $id: updatedMovedTask.$id,
