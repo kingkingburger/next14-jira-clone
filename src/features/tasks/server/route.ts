@@ -303,6 +303,53 @@ const app = new Hono()
         assignee,
       },
     });
-  });
+  })
+  .post(
+    "/bulk-update",
+    sessionMiddleware,
+    zValidator(
+      "json",
+      z.object({
+        tasks: z.array(
+          z.object({
+            $id: z.string(),
+            status: z.nativeEnum(TaskStatus),
+            position: z.number().int().positive().min(1000).max(1_000_000),
+          }),
+        ),
+      }),
+    ),
+    async (c) => {
+      const user = c.get("user");
+      const databases = c.get("databases");
+      const { tasks } = await c.req.valid("json");
+
+      const tasksToUpdate = await databases.listDocuments(
+        DATABASE_ID,
+        TASKS_ID,
+        [
+          Query.contains(
+            "$id",
+            tasks.map((task) => task.$id),
+          ),
+        ],
+      );
+
+      const workspaceIds = new Set(
+        tasksToUpdate.documents.map((task) => task.workspaceId),
+      );
+      if (workspaceIds.size !== 1) {
+        return c.json({ error: "All tasks must belong to the same workspace" });
+      }
+
+      const workspaceId = workspaceIds.values().next().value;
+
+      const member = await getMembers({
+        databases,
+        workspaceId,
+        userId: user.$id,
+      });
+    },
+  );
 
 export default app;
