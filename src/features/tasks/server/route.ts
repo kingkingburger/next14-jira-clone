@@ -349,6 +349,22 @@ const app = new Hono()
         workspaceId,
         userId: user.$id,
       });
+
+      if (!member) {
+        return c.json({ error: "Unauthorized" }, 401);
+      }
+
+      const updatedTasks = await Promise.all(
+        tasks.map(async (task) => {
+          const { $id, status, position } = task;
+          return databases.updateDocument<Task>(DATABASE_ID, TASKS_ID, $id, {
+            status,
+            position,
+          });
+        }),
+      );
+
+      return c.json({ data: updatedTasks });
     },
   );
 
