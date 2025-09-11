@@ -88,7 +88,7 @@ export const TaskViewSwitcher = () => {
               />
             </TabsContent>
             <TabsContent value="calendar" className="mt-0">
-              {JSON.stringify(tasks)}
+              <DataCalendar data={tasks?.documents ?? []} />
             </TabsContent>
           </>
         )}
