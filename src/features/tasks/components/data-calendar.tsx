@@ -1,3 +1,5 @@
+import { Task } from "@/features/tasks/types";
+
 interface DataCalendarProps {
   data: Task[];
 }
